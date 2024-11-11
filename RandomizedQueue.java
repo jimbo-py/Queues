@@ -2,9 +2,10 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
-import edu.princeton.cs.algs4.StdRandom; // Corrected import
+import edu.princeton.cs.algs4.StdRandom;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
+    @SuppressWarnings("unchecked")
     private Item[] items = (Item[]) new Object[2];
     private int size = 0;
 
@@ -38,7 +39,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (size == 0) {
             throw new NoSuchElementException("Can't dequeue, queue is empty");
         }
-        int randIndex = StdRandom.uniform(size); // Pick random index for dequeue
+        int randIndex = StdRandom.uniform(0, size); // Updated for deprecation fix
         Item item = this.items[randIndex];
         this.items[randIndex] = this.items[size - 1]; // Swap random item with last item
         this.items[size - 1] = null;
@@ -57,7 +58,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (size == 0) {
             throw new NoSuchElementException("Can't sample, queue is empty");
         }
-        int i = StdRandom.uniform(size);
+        int i = StdRandom.uniform(0, size); // Updated for deprecation fix
         return this.items[i];
     }
 
@@ -86,6 +87,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private void resize(int capacity) {
         Item[] copy = (Item[]) new Object[capacity];
         for (int i = 0; i < size; i++) {
@@ -96,7 +98,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private void swapItem() {
         if (size > 0) {
-            int i = StdRandom.uniform(size);
+            int i = StdRandom.uniform(0, size); // Updated for deprecation fix
             Item temp = items[i];
             items[i] = items[size - 1];
             items[size - 1] = temp;
@@ -114,3 +116,4 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
     }
 }
+
